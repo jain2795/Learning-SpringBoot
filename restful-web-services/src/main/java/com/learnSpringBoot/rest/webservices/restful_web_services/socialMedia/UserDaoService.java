@@ -25,11 +25,10 @@ public class UserDaoService {
     }
 
     public User getUserById(Integer userId) {
-        for (User user : usersList) {
-            if (Objects.equals(user.getId(), userId)) {
-                return user;
-            }
-        }
-        return null;
+       return usersList.stream()
+               .filter(u -> Objects.equals(u.getId(), userId))
+               .findFirst()
+               .orElse(null);
+
     }
 }
